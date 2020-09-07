@@ -26,8 +26,8 @@ pipeline {
             when { buildingTag() }
             steps {
                 script {
-                    sh "$TAG_NAME"
-                    sh "$GIT_COMMIT"
+                    sh "echo $TAG_NAME"
+                    sh "echo $GIT_COMMIT"
                 }
             }
         }
