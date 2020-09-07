@@ -20,6 +20,7 @@ pipeline {
         stage('Hello') {
             steps {
                 echo "Hello World ${params.ENVIRONMENT}"
+                sh "echo $GIT_COMMIT"
             }
         }
         stage('tag-only') {
