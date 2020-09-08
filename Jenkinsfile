@@ -1,3 +1,7 @@
+def VARIABLE = 'VARIABLE'
+string ANOTHER_VARIABLE = 'ANOTHER_VARIABLE'
+YET_ANOTHER_VARIABLE = 'YET_ANOTHER_VARIABLE'
+
 pipeline {
     agent any
 
@@ -42,10 +46,18 @@ pipeline {
         stage('accessing-dummy-artifact-file-in-another-stage') {
             steps {
                 script {
-                    sh "cat dummy-file.txt"
+                    sh 'cat dummy-file.txt'
+                }
+            }
+        }
+        stage('accessing-variables') {
+            steps {
+                script {
+                    echo "${VARIABLE}"
+                    echo "${ANOTHER_VARIABLE}"
+                    echo "${YET_ANOTHER_VARIABLE}"
                 }
             }
         }
     }
 }
-
