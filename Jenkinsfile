@@ -56,6 +56,7 @@ pipeline {
                     echo "${VARIABLE}"
                     echo "${ANOTHER_VARIABLE}"
                     echo "${YET_ANOTHER_VARIABLE}"
+                    echo YET_ANOTHER_VARIABLE
                 }
             }
         }
