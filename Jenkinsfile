@@ -32,6 +32,20 @@ pipeline {
                 }
             }
         }
+        stage('creating-dummy-artifact-file') {
+            steps {
+                script {
+                    sh "echo 'sample-file-content' > dummy-file.txt"
+                }
+            }
+        }
+        stage('accessing-dummy-artifact-file-in-another-stage') {
+            steps {
+                script {
+                    sh "cat dummy-file.txt"
+                }
+            }
+        }
     }
 }
 
