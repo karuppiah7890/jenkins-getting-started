@@ -56,7 +56,7 @@ pipeline {
 
                     catchError(buildResult: 'SUCCESS', stageResult: 'ABORTED') { 
                         try {
-                            MY_CUSTOM_VARIABLE_FOR_ENV = input message: "Should we continue?",
+                            env.MY_CUSTOM_VARIABLE_FOR_ENV = input message: "Should we continue?",
                                                                 ok: "Yes, we should.",
                                                                 parameters: [choice(name: 'ENVIRONMENT',
                                                                     choices: 'None\nQA',
@@ -77,14 +77,14 @@ pipeline {
         stage('print-environment') {
             steps {
                 script {
-                    echo MY_CUSTOM_VARIABLE_FOR_ENV
+                    echo env.MY_CUSTOM_VARIABLE_FOR_ENV
                 }
             }
         }
         stage('some-action-in-qa') {
             when {
                 expression {
-                    return MY_CUSTOM_VARIABLE_FOR_ENV == "QA"
+                    return env.MY_CUSTOM_VARIABLE_FOR_ENV == "QA"
                 }
             }
             steps {
