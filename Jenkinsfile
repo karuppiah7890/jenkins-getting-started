@@ -48,7 +48,7 @@ pipeline {
         }
         stage('approve-to-proceed-to-the-next-step') {
             options {
-                timeout(time: 3, unit: 'SECONDS')
+                timeout(time: 5, unit: 'SECONDS')
             }
             steps {
                 script {
