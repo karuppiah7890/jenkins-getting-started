@@ -57,10 +57,7 @@ pipeline {
                     catchError(buildResult: 'SUCCESS', stageResult: 'ABORTED') { 
                         try {
                             env.MY_CUSTOM_VARIABLE_FOR_ENV = input message: "Should we continue?",
-                                                                ok: "Yes, we should.",
-                                                                parameters: [choice(name: 'ENVIRONMENT',
-                                                                    choices: 'None\nQA',
-                                                                    description: 'Which environment?')]
+                                                                ok: "Yes, we should."
                         } catch (org.jenkinsci.plugins.workflow.steps.FlowInterruptedException e) {
                             error "Stage timed out" 
                         } catch (Throwable e) {
