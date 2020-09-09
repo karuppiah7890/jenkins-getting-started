@@ -56,11 +56,12 @@ pipeline {
 
                     catchError(buildResult: 'SUCCESS', stageResult: 'ABORTED') { 
                         try {
+                            env.MY_CUSTOM_VARIABLE_FOR_ENV = null
                             input message: "Should we continue?",
                                   ok: "Yes, we should."
                             env.MY_CUSTOM_VARIABLE_FOR_ENV = 'QA'
                         } catch (org.jenkinsci.plugins.workflow.steps.FlowInterruptedException e) {
-                            error "Stage timed out" 
+                            error "Stage timed out or aborted" 
                         } catch (Throwable e) {
                             caughtException = e
                         }
