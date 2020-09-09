@@ -65,17 +65,19 @@ pipeline {
             options {
                 timeout(time: 3, unit: 'SECONDS')
             }
-            script {
-                params.ENVIRONMENT = input {
-                    message "Should we continue?"
-                    ok "Yes, we should."
-                    parameters([
-                        choice(
-                            name: 'ENVIRONMENT',
-                            choices: ['None', 'QA'],
-                            description: 'Which environment?'
-                        )
-                    ])
+            steps {
+                script {
+                    params.ENVIRONMENT = input {
+                        message "Should we continue?"
+                        ok "Yes, we should."
+                        parameters([
+                            choice(
+                                name: 'ENVIRONMENT',
+                                choices: ['None', 'QA'],
+                                description: 'Which environment?'
+                            )
+                        ])
+                    }
                 }
             }
         }
