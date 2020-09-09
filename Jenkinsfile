@@ -52,7 +52,7 @@ pipeline {
             }
             steps {
                 script {
-                    params.ENVIRONMENT = input message: "Should we continue?",
+                    MY_CUSTOM_VARIABLE_FOR_ENV = input message: "Should we continue?",
                         ok: "Yes, we should.",
                         parameters: [choice(name: 'ENVIRONMENT',
                             choices: 'None\nQA',
@@ -63,7 +63,7 @@ pipeline {
         stage('print-environment') {
             steps {
                 script {
-                    echo params.ENVIRONMENT
+                    echo MY_CUSTOM_VARIABLE_FOR_ENV
                 }
             }
         }
