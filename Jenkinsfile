@@ -65,29 +65,31 @@ pipeline {
             options {
                 timeout(time: 3, unit: 'SECONDS')
             }
-            steps {
-                script {
-                    properties([
-                        parameters([
-                            choice(
-                                name: 'DO_ACTION',
-                                choices: ['NO', 'YES'],
-                                description: 'Do the next action?'
-                            )
-                        ]
-                    )])
+            input {
+                message "Should we continue?"
+                ok "Yes, we should."
+                parameters {
+                    parameters([
+                        choice(
+                            name: 'ENVIRONMENT',
+                            choices: ['None', 'QA'],
+                            description: 'Which environment?'
+                        )
+                    ]
                 }
             }
         }
-        stage('some-action') {
+        stage('some-action-in-qa') {
             when {
                 expression {
-                    return params.ENVIRONMENT == "YES"
+                    return params.ENVIRONMENT == "QA"
                 }
             }
             steps {
                 script {
-                    echo "Doing some action! I remember the variable too! It's ${PREVIOUS_STAGE_VARIABLE}"
+                    echo 'Doing some action in QA!'
+                    echo 'I remember the previous stage variable too!'
+                    echo "It's ${PREVIOUS_STAGE_VARIABLE}!"
                 }
             }
         }
