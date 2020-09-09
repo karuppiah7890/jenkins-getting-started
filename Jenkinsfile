@@ -91,7 +91,7 @@ pipeline {
                 script {
                     echo 'Doing some action in QA!'
                     echo 'I remember the previous stage variable too!'
-                    echo "It's ${PREVIOUS_STAGE_VARIABLE}!"
+                    echo "It's ${GIT_COMMIT}!"
                 }
             }
         }
