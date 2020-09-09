@@ -70,7 +70,7 @@ pipeline {
         stage('some-action-in-qa') {
             when {
                 expression {
-                    return params.ENVIRONMENT == "QA"
+                    return MY_CUSTOM_VARIABLE_FOR_ENV == "QA"
                 }
             }
             steps {
