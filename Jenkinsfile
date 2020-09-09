@@ -57,6 +57,37 @@ pipeline {
                     echo "${ANOTHER_VARIABLE}"
                     echo "${YET_ANOTHER_VARIABLE}"
                     echo YET_ANOTHER_VARIABLE
+                    PREVIOUS_STAGE_VARIABLE = env.GIT_COMMIT
+                }
+            }
+        }
+        stage('approve-to-proceed-to-the-next-step') {
+            options {
+                timeout(time: 3, unit: 'SECONDS')
+            }
+            steps {
+                script {
+                    properties([
+                        parameters([
+                            choice(
+                                name: 'DO_ACTION',
+                                choices: ['NO', 'YES'],
+                                description: 'Do the next action?'
+                            )
+                        ]
+                    )])
+                }
+            }
+        }
+        stage('some-action') {
+            when {
+                expression {
+                    return params.ENVIRONMENT == "YES"
+                }
+            }
+            steps {
+                script {
+                    echo "Doing some action! I remember the variable too! It's ${PREVIOUS_STAGE_VARIABLE}"
                 }
             }
         }
