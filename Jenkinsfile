@@ -72,7 +72,6 @@ pipeline {
                         parameters: [choice(name: 'ENVIRONMENT',
                             choices: 'None\nQA',
                             description: 'Which environment?')]
-                    }
                 }
             }
         }
