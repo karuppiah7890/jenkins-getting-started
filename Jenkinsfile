@@ -67,16 +67,11 @@ pipeline {
             }
             steps {
                 script {
-                    params.ENVIRONMENT = input {
-                        message "Should we continue?"
-                        ok "Yes, we should."
-                        parameters([
-                            choice(
-                                name: 'ENVIRONMENT',
-                                choices: ['None', 'QA'],
-                                description: 'Which environment?'
-                            )
-                        ])
+                    params.ENVIRONMENT = input message: "Should we continue?",
+                        ok: "Yes, we should.",
+                        parameters: [choice(name: 'ENVIRONMENT',
+                            choices: 'None\nQA',
+                            description: 'Which environment?')]
                     }
                 }
             }
